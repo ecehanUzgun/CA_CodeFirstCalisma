@@ -33,6 +33,12 @@ namespace CA_CodeFirst.Context
             modelBuilder.Entity<Product>().Property(x => x.ProductName).HasMaxLength(40);
             modelBuilder.Entity<Product>().Property(x => x.QuantityPerUnit).HasMaxLength(20);
 
+            modelBuilder.Entity<Product>().Property(x => x.UnitPrice).HasColumnType("decimal(18,4)");
+            /*
+             * Hatasını çözmek için yukarıdaki decimal kodu kullanıldı.
+             No store type was specified for the decimal property 'UnitPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+             */
+
             //Supplier Properties
             modelBuilder.Entity<Supplier>().Property(x => x.CompanyName).HasMaxLength(40);
             modelBuilder.Entity<Supplier>().Property(x => x.ContactName).HasMaxLength(30);

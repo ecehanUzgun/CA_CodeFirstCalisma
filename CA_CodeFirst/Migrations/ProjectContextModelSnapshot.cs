@@ -64,7 +64,7 @@ namespace CA_CodeFirst.Migrations
                         .HasColumnType("smallint");
 
                     b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<short>("UnitsInStock")
                         .HasColumnType("smallint");

@@ -52,7 +52,7 @@ namespace CA_CodeFirst.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductName = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    UnitPrice = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
                     QuantityPerUnit = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     UnitsInStock = table.Column<short>(type: "smallint", nullable: false),
                     UnitsOnOrder = table.Column<short>(type: "smallint", nullable: false),
