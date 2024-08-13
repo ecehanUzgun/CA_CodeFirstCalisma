@@ -11,6 +11,10 @@ namespace CA_CodeFirst.Context
         public DbSet<Product> Products { get; set; }
         //Suppliers
         public DbSet<Supplier> Suppliers { get; set; }
+        //Orders
+        public DbSet<Order> Orders { get; set; }
+        //OrderDetails
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
         //Veritabanı Bağlantı İşlemi (ConnectionString tanımlaması)
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -51,7 +55,17 @@ namespace CA_CodeFirst.Context
             modelBuilder.Entity<Supplier>().Property(x => x.Phone).HasMaxLength(24);
             modelBuilder.Entity<Supplier>().Property(x => x.Fax).HasMaxLength(24);
 
+            //Order Properties
+            modelBuilder.Entity<Order>().Property(x => x.ShipName).HasMaxLength(40);
+            modelBuilder.Entity<Order>().Property(x => x.ShipAddress).HasMaxLength(60);
+            modelBuilder.Entity<Order>().Property(x => x.ShipCity).HasMaxLength(15);    
+            modelBuilder.Entity<Order>().Property(x => x.ShipRegion).HasMaxLength(15);
+            modelBuilder.Entity<Order>().Property(x => x.ShipPostalCode).HasMaxLength(10);
+            modelBuilder.Entity<Order>().Property(x => x.ShipCountry).HasMaxLength(15);
+            modelBuilder.Entity<Order>().Property(x => x.Freight).HasColumnType("decimal(18,4)");
 
+            //Order Details
+            modelBuilder.Entity<OrderDetail>().Property(x => x.UnitPrice).HasColumnType("decimal(18,4)");
         }
     }
 }
