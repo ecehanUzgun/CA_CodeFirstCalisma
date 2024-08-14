@@ -15,6 +15,10 @@ namespace CA_CodeFirst.Context
         public DbSet<Order> Orders { get; set; }
         //OrderDetails
         public DbSet<OrderDetail> OrderDetails { get; set; }
+        //Shippers
+        public DbSet<Shipper> Shippers { get; set; }
+        //Customers
+        public DbSet<Customer> Customers { get; set; }
 
         //Veritabanı Bağlantı İşlemi (ConnectionString tanımlaması)
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -66,6 +70,36 @@ namespace CA_CodeFirst.Context
 
             //Order Details
             modelBuilder.Entity<OrderDetail>().Property(x => x.UnitPrice).HasColumnType("decimal(18,4)");
+            
+            modelBuilder.Entity<OrderDetail>()
+                .HasKey(x => new { x.OrderID, x.ProductID }); //Composite Key
+
+            modelBuilder.Entity<OrderDetail>()
+                .HasOne(x => x.Order)
+                .WithMany(x => x.OrderDetail)
+                .HasForeignKey(x => x.OrderID);
+                       
+            modelBuilder.Entity<OrderDetail>()
+                .HasOne(x => x.Product)
+                .WithMany(x => x.OrderDetail)
+                .HasForeignKey(x => x.ProductID);
+            
+            //Shippers
+            modelBuilder.Entity<Order>()
+                .HasOne(x => x.Shipper)
+                .WithMany(x => x.Order)
+                .HasForeignKey(x => x.ShipVia);
+
+            //Customers
+            //modelBuilder.Entity<Order>()
+            //   .HasOne(x => x.Customer)
+            //   .WithMany(x => x.Order)
+            //   .HasForeignKey(x => x.CustomerId);
+
+            modelBuilder.Entity<Customer>()
+                .HasMany(x => x.Order)
+                .WithOne(x => x.Customer)
+                .HasForeignKey(x => x.CustomerId);
         }
     }
 }

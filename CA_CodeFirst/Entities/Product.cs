@@ -13,5 +13,7 @@
         public Category Category { get; set; }
         public int SupplierId { get; set; }
         public Supplier Supplier { get; set; }
+        //List<>
+        public List<OrderDetail> OrderDetail { get; set; }
     }
 }
